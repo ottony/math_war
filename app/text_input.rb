@@ -24,10 +24,6 @@ class TextInput < Gosu::TextInput
     else
       background_color = INACTIVE_COLOR
     end
-    #@window.draw_quad(x - PADDING - 10,         y - PADDING - 10,          INACTIVE_COLOR,
-                      #x + width + PADDING + 10, y - PADDING - 10,          INACTIVE_COLOR,
-                      #x - PADDING - 10,         y + height + PADDING + 10, INACTIVE_COLOR,
-                      #x + width + PADDING + 10, y + height + PADDING + 10, INACTIVE_COLOR, 0)
 
     @window.draw_quad(x + PADDING,         y + PADDING,          background_color,
                       x + width - PADDING, y + PADDING,          background_color,

@@ -1,11 +1,9 @@
 require 'pry'
 require 'gosu'
 
-require_relative './text_input'
-require_relative './bullet'
-require_relative './trajectory'
+Dir['./app/**/*.rb'].each { |f| require_relative f }
 
 loop do
-  load './main.rb'
+  Window.new.show
   sleep 1.0/5
 end

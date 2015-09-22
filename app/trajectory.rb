@@ -28,9 +28,11 @@ class Trajectory
   private
 
   def new_function cordinate, content
-    function = <<-FUNCTION
-      @last_#{ cordinate } += #{ content }
-    FUNCTION
+    cordinate_const   = "@last_#{ cordinate }"
+    cordinate_value   = instance_variable_get cordinate_const if instance_variable_defined? cordinate_const
+    cordinate_value ||= 0
+
+    function = "#{ cordinate_const } = ( #{ content } ) + #{ cordinate_value }"
 
     puts function
 

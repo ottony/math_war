@@ -23,7 +23,7 @@ class Window < Gosu::Window
       Gosu::KbEscape => lambda{ unfocus_input },
       Gosu::KbDelete => lambda{ exit },
       Gosu::MsLeft   => lambda{ mouse_click },
-      Gosu::KbG      => lambda{ change_trajectory }
+      Gosu::KbReturn => lambda{ change_trajectory }
     }
   end
 
@@ -37,6 +37,7 @@ class Window < Gosu::Window
 
     @cursor.draw(mouse_x, mouse_y, 2)
     @font.draw("#{Gosu.fps} fps. Frame #{@frame}", 10, self.height - @font.height, 0)
+    @font.draw("X: #{ @bullet.x } Y: #{ @bullet.y }", 10, self.height - @font.height - 10, 0)
   end
 
   private
@@ -62,5 +63,3 @@ class Window < Gosu::Window
     close
   end
 end
-
-Window.new.show
