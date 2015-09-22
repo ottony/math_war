@@ -17,11 +17,11 @@ class Trajectory
     new_function :y, input_text
   end
 
-  def x time
+  def x time = 0
     @last_x
   end
 
-  def y time
+  def y time = 0
     @last_y
   end
 
@@ -33,8 +33,6 @@ class Trajectory
     cordinate_value ||= 0
 
     function = "#{ cordinate_const } = ( #{ content } ) + #{ cordinate_value }"
-
-    puts function
 
     instance_eval <<-METHOD
       def #{ cordinate }(t)

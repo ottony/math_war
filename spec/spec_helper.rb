@@ -16,6 +16,10 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+require_relative '../config/load'
+Dir['spec/support/**/*.rb'].each { |f| require File.join( __dir__, '..', f) }
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

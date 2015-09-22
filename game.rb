@@ -1,7 +1,4 @@
-require 'pry'
-require 'gosu'
-
-Dir['./app/**/*.rb'].each { |f| require_relative f }
+require_relative 'config/load'
 
 loop do
   Window.new.show
