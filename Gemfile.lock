@@ -3,7 +3,7 @@ GEM
   specs:
     coderay (1.1.0)
     diff-lcs (1.2.5)
-    gosu (0.10.2)
+    gosu (0.10.8)
     method_source (0.8.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -28,9 +28,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  gosu (~> 0.10.2)
+  gosu (~> 0.10.8)
   pry
   rspec
 
 BUNDLED WITH
-   1.10.6
+   1.13.5
