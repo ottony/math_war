@@ -16,7 +16,7 @@ describe Trajectory do
       trajectory.y = ''
 
       expect(trajectory.x time ).to eq time
-      expect(trajectory.y time ).to eq trajectory.last_y
+      expect(trajectory.y time ).to eq trajectory.initial_y
     end
 
     it 'calc single function' do
@@ -37,14 +37,14 @@ describe Trajectory do
   end
 
   context 'calculates' do
-    it 'continue from the last_value' do
+    it 'continue from the initial_value' do
       trajectory.x = 'sin( t ) + cos( 2*t )'
-      last_x = trajectory.x time
+      initial_x = trajectory.x time
 
       trajectory.x = 'E*t'
 
-      expect(trajectory.x 0).to eq last_x
-      expect(trajectory.x time).to eq last_x + E*time
+      expect(trajectory.x 0).to eq initial_x
+      expect(trajectory.x time).to eq initial_x + E*time
     end
 
     it 'constant from any time' do

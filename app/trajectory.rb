@@ -1,43 +1,50 @@
 class Trajectory
   include Math
 
-  attr_reader :last_x, :last_y
+  attr_reader :initial_x, :initial_y, :last_time
 
   def initialize x: 0, y: 0
-    @last_x, @last_y = x, y
+    @initial_x, @initial_y = x, y
   end
 
-  def x= input_text
+  def x=(input_text)
     input_text = 't'  if input_text.to_s.empty?
-    new_function :x, input_text
+    new_function(:x, input_text)
   end
 
-  def y= input_text
-    input_text = @last_y  if input_text.to_s.empty?
-    new_function :y, input_text
+  def y=(input_text)
+    input_text = initial_y  if input_text.to_s.empty?
+    new_function(:y, input_text)
   end
 
-  def x time = 0
-    @last_x
+  def x(time = 0)
+    initial_x
   end
 
-  def y time = 0
-    @last_y
+  def y(time = 0)
+    initial_y
   end
 
   private
 
-  def new_function cordinate, content
-    cordinate_const   = "@last_#{ cordinate }"
-    cordinate_value   = instance_variable_get cordinate_const if instance_variable_defined? cordinate_const
-    cordinate_value ||= 0
+  def new_function(cordinate, function)
+    initial_ = "@initial_#{ cordinate }"
 
-    function = "#{ cordinate_const } = ( #{ content } ) + #{ cordinate_value }"
+    #  @initial_x = x(@last_time)
+    #
+    #  def x(t)
+    #    t = t.to_f
+    #    @initial_x ||= 0
+    #    @initial_x += sin(t)
+    #  end
 
     instance_eval <<-METHOD
+      #{ initial_ } = #{ cordinate }(@last_time)
+
       def #{ cordinate }(t)
         t = t.to_f
-        #{ function }
+        @last_time = t
+        (#{ function }) + (#{ initial_ } || 0.0)
       end
     METHOD
   end
