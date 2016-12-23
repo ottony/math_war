@@ -17,6 +17,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+ENV['ENVIRONMENT'] = 'test'
 require_relative '../config/load'
 Dir['spec/support/**/*.rb'].each { |f| require File.join( __dir__, '..', f) }
 
