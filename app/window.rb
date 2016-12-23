@@ -6,8 +6,8 @@ class Window < Gosu::Window
 
     @font        = Gosu::Font.new(self, Gosu::default_font_name, 20)
     @text_fields = [
-      TextInput.new(self, font, 0, 0),
-      TextInput.new(self, font, 0, font.height + 2)
+      TextInput.new(self, font, 0, 0, '0'),
+      TextInput.new(self, font, 0, font.height + 2, 't')
     ]
 
     @bullet = Bullet.new(self, self.width / 2, self.height / 2)
@@ -16,6 +16,7 @@ class Window < Gosu::Window
   end
 
   def update
+    bullet.explode! if bullet.wall_colision?
     bullet.update
 
     @frame += 1
@@ -42,7 +43,8 @@ class Window < Gosu::Window
 
     cursor.draw(mouse_x, mouse_y, 2)
     font.draw("#{Gosu.fps} fps. Frame #{frame}", 10, self.height - font.height, 0)
-    font.draw("X: #{ bullet.x } Y: #{ bullet.y }", 10, self.height - font.height - 10, 0)
+    font.draw("X: #{ bullet.x } Y: #{ bullet.y }", 10, self.height - font.height - 15, 0)
+    font.draw('Exploding', 10, self.height - font.height - 30, 0) if bullet.exploding
   end
 
   private

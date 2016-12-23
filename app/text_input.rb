@@ -8,10 +8,10 @@ class TextInput < Gosu::TextInput
   
   attr_reader :x, :y
   
-  def initialize(window, font, x, y)
+  def initialize(window, font, x, y, default_text = "")
     super()
     @window, @font, @x, @y = window, font, x, y
-    self.text = ""
+    self.text = default_text
   end
 
   def filter text

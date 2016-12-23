@@ -1,6 +1,8 @@
 class Bullet
+  include Debug
+
   attr_accessor :x, :y
-  attr_reader :tick
+  attr_reader :tick, :exploding
 
   COLOR  = 0xff_FF0000
 
@@ -29,14 +31,32 @@ class Bullet
   end
 
   def draw
-    @window.draw_quad(x     , y     , COLOR ,
-                      x + 9 , y     , COLOR ,
-                      x     , y + 9 , COLOR ,
-                      x + 9 , y + 9 , COLOR , 1)
+    if exploding?
+      d("EXPLODING")
+      stop if tick >= 100
+    else
+      @window.draw_quad(x     , y     , COLOR ,
+                        x + 9 , y     , COLOR ,
+                        x     , y + 9 , COLOR ,
+                        x + 9 , y + 9 , COLOR , 1)
+    end
   end
 
+  def exploding?
+    !! exploding
+  end
+
+  def explode!
+    return if exploding?
+    stop
+    @exploding = true
+  end
+
+  private
+
   def stop
-    @trajectory.stop
+    @exploding = false
     @tick = 0
+    @trajectory.stop
   end
 end

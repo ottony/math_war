@@ -1,5 +1,6 @@
 class Trajectory
   include Math
+  include Debug
 
   attr_reader :initial_x, :initial_y, :last_time
 
@@ -9,12 +10,12 @@ class Trajectory
 
   def x=(input_text)
     input_text = 't'  if input_text.to_s.empty?
-    new_function(:x, input_text)
+    def_movement(:x, input_text)
   end
 
   def y=(input_text)
     input_text = initial_y  if input_text.to_s.empty?
-    new_function(:y, input_text)
+    def_movement(:y, input_text)
   end
 
   def x(time = 0)
@@ -25,9 +26,17 @@ class Trajectory
     initial_y
   end
 
+  def stop
+    @initial_x = x(0)
+    @initial_y = y(0)
+
+    def_movement(:x, 0)
+    def_movement(:y, 0)
+  end
+
   private
 
-  def new_function(cordinate, function)
+  def def_movement(cordinate, function)
     initial_ = "@initial_#{ cordinate }"
 
     #  @initial_x = x(@last_time)
@@ -40,6 +49,7 @@ class Trajectory
 
     instance_eval <<-METHOD
       #{ initial_ } = #{ cordinate }(@last_time)
+      d("#{ initial_ }: \#\{#{ initial_ }\}")
 
       def #{ cordinate }(t)
         t = t.to_f
