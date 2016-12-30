@@ -9,12 +9,12 @@ class Trajectory
   end
 
   def x=(input_text)
-    input_text = 't'  if input_text.to_s.empty?
+    input_text = 't' if input_text.to_s.empty?
     def_movement(:x, input_text)
   end
 
   def y=(input_text)
-    input_text = initial_y  if input_text.to_s.empty?
+    input_text = initial_y if input_text.to_s.empty?
     def_movement(:y, input_text)
   end
 
@@ -32,6 +32,29 @@ class Trajectory
 
     def_movement(:x, 0)
     def_movement(:y, 0)
+  end
+
+  def distance(t)
+    (x(t-1) - x(t)).to_f * -1
+  end
+
+  def height(t)
+    (y(t-1) - y(t)).to_f * -1
+  end
+
+  def angle(t)
+    distance  = distance(t)
+    direction = distance > 0 ? 0 : 180
+
+    return 0.0 if distance.zero?
+
+    (atan( height(t) / distance ) * 180 / PI) + direction
+  end
+
+  def position(t)
+    angle = angle(t)
+
+    [x(t), y(t), angle]
   end
 
   private
