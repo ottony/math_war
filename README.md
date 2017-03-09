@@ -1,5 +1,5 @@
 # Math War
-A mathematics game to fight and learn
+A mathematics game made with Gosu ruby gem intended to understand mathematical functions
 
 ## Until now
 
