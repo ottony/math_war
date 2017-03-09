@@ -1,4 +1,4 @@
-# math_war
+# Math War
 A mathematics game to fight and learn
 
 ## Until now
